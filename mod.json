@@ -1,0 +1,9 @@
+{
+	"geode": "2.0.0-beta.7",
+	"gd": "2.204",
+	"version": "v0.1",
+	"id": "zohnannor.dark_mode",
+	"name": "Dark Mode",
+	"developer": "zohnannor",
+	"description": "Changes hard-coded colors to a dark-mode-style theme. Inspired by Absolute's Dark Mode Texture Pack Patcher for 2.1."
+}
