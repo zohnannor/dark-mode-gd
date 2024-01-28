@@ -4,6 +4,7 @@
 #include <Geode/modify/GJCommentListLayer.hpp>
 #include <Geode/modify/GJScoreCell.hpp>
 #include <Geode/modify/LevelInfoLayer.hpp>
+#include <Geode/modify/LevelPage.hpp>
 #include <Geode/modify/LevelSearchLayer.hpp>
 #include <Geode/modify/PauseLayer.hpp>
 
@@ -74,9 +75,7 @@ const ccColor4B darken(const ccColor4B& color) {
 };
 
 void darkenNode(CCRGBAProtocol* rgbaNode) {
-    auto b = rgbaNode->getColor();
     rgbaNode->setColor(darken(rgbaNode->getColor()));
-    auto a = rgbaNode->getColor();
 }
 
 class $modify(GJCommentListLayer) {
@@ -164,7 +163,7 @@ class $modify(LevelInfoLayer) {
 };
 
 class $modify(PauseLayer) {
-    PauseLayer* create(bool p0) {
+    static PauseLayer* create(bool p0) {
         auto pauseLayer = PauseLayer::create(p0);
 
         if (auto bar = getChildOfType<CCSprite>(pauseLayer, 0)) {
@@ -179,6 +178,26 @@ class $modify(PauseLayer) {
         }
 
         return pauseLayer;
+    };
+};
+
+class $modify(LevelPage) {
+    static LevelPage* create(GJGameLevel * p0) {
+        auto levelPage = LevelPage::create(p0);
+
+        if (auto bar = getChildOfType<CCSprite>(levelPage, 0)) {
+            if (auto sprite = getChildOfType<CCSprite>(bar, 0)) {
+                darkenNode(typeinfo_cast<CCNodeRGBA*>(sprite));
+            }
+        }
+
+        if (auto bar = getChildOfType<CCSprite>(levelPage, 1)) {
+            if (auto sprite = getChildOfType<CCSprite>(bar, 0)) {
+                darkenNode(typeinfo_cast<CCNodeRGBA*>(sprite));
+            }
+        }
+
+        return levelPage;
     };
 };
 
