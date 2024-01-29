@@ -14,7 +14,20 @@ using namespace geode::prelude;
 // - define constants
 // - add settings
 // - split into files?
-// expand readme, about.md
+// - exception safety
+// - expand readme, about.md
+// - compatibility with other mods?
+// - lists progress bars
+// - name input, description input
+// - text?
+// - level share description
+// - level loading play button bg
+// - player controls settings bg
+// - map packs?
+// - chest background
+// - chest platforms
+// - shop colors
+// - leaderboard highlight
 
 const int ccc3Btoint(const ccColor3B& color) {
     return color.r << 16 | color.g << 8 | color.b << 0;
@@ -78,7 +91,7 @@ void darkenNode(CCRGBAProtocol* rgbaNode) {
     rgbaNode->setColor(darken(rgbaNode->getColor()));
 }
 
-class $modify(GJCommentListLayer) {
+class $modify(CustomColorsGJCommentListLayer, GJCommentListLayer) {
     static GJCommentListLayer* create(BoomListView * p0, char const* p1,
                                       cocos2d::ccColor4B p2, float p3, float p4,
                                       bool p5) {
@@ -89,9 +102,11 @@ class $modify(GJCommentListLayer) {
     };
 };
 
-class $modify(CommentCell) {
+class $modify(CustomColorsCommentCell, CommentCell) {
     void draw() {
-        darkenNode(getChildOfType<CCLayerColor>(this, 0));
+        if (auto c = getChildOfType<CCLayerColor>(this, 0)) {
+            darkenNode(c);
+        }
         if (auto background = this->getChildByIDRecursive("background")) {
             darkenNode(typeinfo_cast<CCRGBAProtocol*>(background));
         }
@@ -102,14 +117,14 @@ class $modify(CommentCell) {
     void updateBGColor(int p0) { CommentCell::updateBGColor(darken(p0)); }
 };
 
-class $modify(CCLayerColor) {
+class $modify(CustomColorsCCLayerColor, CCLayerColor) {
     void draw() {
         darkenNode(this);
         CCLayerColor::draw();
     };
 };
 
-class $modify(LevelSearchLayer) {
+class $modify(CustomColorsLevelSearchLayer, LevelSearchLayer) {
     bool init(int p0) {
         if (!LevelSearchLayer::init(p0)) {
             return false;
@@ -141,7 +156,7 @@ class $modify(LevelSearchLayer) {
     };
 };
 
-class $modify(LevelInfoLayer) {
+class $modify(CustomColorsLevelInfoLayer, LevelInfoLayer) {
     bool init(GJGameLevel * p0, bool p1) {
         if (!LevelInfoLayer::init(p0, p1)) {
             return false;
@@ -162,7 +177,7 @@ class $modify(LevelInfoLayer) {
     };
 };
 
-class $modify(PauseLayer) {
+class $modify(CustomColorsPauseLayer, PauseLayer) {
     static PauseLayer* create(bool p0) {
         auto pauseLayer = PauseLayer::create(p0);
 
@@ -181,7 +196,7 @@ class $modify(PauseLayer) {
     };
 };
 
-class $modify(LevelPage) {
+class $modify(CustomColorsLevelPage, LevelPage) {
     static LevelPage* create(GJGameLevel * p0) {
         auto levelPage = LevelPage::create(p0);
 
@@ -202,7 +217,7 @@ class $modify(LevelPage) {
 };
 
 // TODO: not implemented in Geode.
-// class $modify(GJScoreCell) {
+// class $modify(CustomColorsGJScoreCell, GJScoreCell) {
 //     void draw() {
 //         darkenNode(getChildOfType<CCLayerColor>(this, 0));
 
