@@ -21,6 +21,7 @@ Check out mod's settings, the default values are set to have same values as [Abs
 -   shop colors
 -   gauntlet colors
 -   leaderboard highlight color
+-   "floating ui settings", a button on every screen for quick customization (for future me: `#include <Geode/ui/GeodeUI.hpp>`)
 
 If you find a bug or have a suggestion, reach out on [Github] (open new issue) or [Discord] (`@zohnannor`)!
 
