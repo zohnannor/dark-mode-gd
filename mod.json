@@ -1,7 +1,7 @@
 {
 	"geode": "2.0.0-beta.12",
 	"gd": "2.204",
-	"version": "v0.1.0",
+	"version": "v0.1.1",
 	"id": "zohnannor.dark_mode",
 	"name": "Dark Mode",
 	"developer": "zohnannor",
@@ -10,7 +10,7 @@
 		"url": "https://github.com/zohnannor/dark-mode-gd/issues",
 		"info": "Create a new issue describing your problem in details"
 	},
-	"description": "Changes hard-coded colors to a dark-mode-style theme. Inspired by Absolute's Dark Mode Texture Pack Patcher for 2.1.",
+	"description": "Changes hard-coded colors to a dark-mode-style theme with an option of customization. Inspired by Absolute's DarkMode Patcher for 2.1.",
 	"settings": {
 		"normal-mode-bar": {
 			"name": "Normal mode bar",
