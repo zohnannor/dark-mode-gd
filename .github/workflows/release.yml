@@ -3,30 +3,44 @@ name: build and release mod
 on:
   push:
     tags:
-      - '*'
-    branches: [main]
+      - "*"
 
 env:
   BUILD_TYPE: RelWithDebInfo # So that smart IQ people can troubleshoot in case of crashes
-  
+
 jobs:
   build:
     name: build
     runs-on: windows-latest
-    if: endsWith(github.event.head_commit.message, ' [release]')
 
     steps:
       - name: checkout code
         uses: actions/checkout@v3
 
-      - name: build mod 
-        uses: geode-sdk/build-geode-mod@main
+      - name: build mod
         id: build
+        uses: geode-sdk/build-geode-mod@main
         with:
-          build-config: '${{env.BUILD_TYPE}}'
+          build-config: "${{env.BUILD_TYPE}}"
 
-      - name: upload artifact
-        uses: actions/upload-artifact@v2
+      - name: create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: zohnannor.dark_mode.geode
-          path: ${{ steps.build.outputs.build-output }}
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            [changelog.md#v${{ github.ref }}](changelog.md#v${{ github.ref }})
+
+      - name: upload release asset
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.build.outputs.build-output }}/zohnannor.dark_mode.geode
+          asset_name: zohnannor.dark_mode.geode
+          asset_content_type: application/octet-stream
