@@ -1,0 +1,32 @@
+name: build and release mod
+
+on:
+  push:
+    tags:
+      - '*'
+    branches: [main]
+
+env:
+  BUILD_TYPE: RelWithDebInfo # So that smart IQ people can troubleshoot in case of crashes
+  
+jobs:
+  build:
+    name: build
+    runs-on: windows-latest
+    if: endsWith(github.event.head_commit.message, ' [release]')
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+
+      - name: build mod 
+        uses: geode-sdk/build-geode-mod@main
+        id: build
+        with:
+          build-config: '${{env.BUILD_TYPE}}'
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: zohnannor.dark_mode.geode
+          path: ${{ steps.build.outputs.build-output }}
