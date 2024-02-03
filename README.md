@@ -24,6 +24,8 @@ Check out mod's settings, the default values are set to have same values as [Abs
 
 If you find a bug or have a suggestion, reach out on [Github] (open new issue) or [Discord] (`@zohnannor`)!
 
+[Changelog]
+
 [Geode]: https://geode-sdk.org/
 [Absolute]: https://x.com/absolllute
 [RedHuseey]: https://www.youtube.com/@Huseey
@@ -31,3 +33,4 @@ If you find a bug or have a suggestion, reach out on [Github] (open new issue) o
 [DarkMode Patcher]: https://discord.com/channels/375379540643545088/375665667061579786/735955770142752909
 [Github]: https://github.com/zohnannor/dark-mode-gd/issues/new
 [Discord]: https://discord.com/channels/@me/210111827869171712
+[Changelog]: changelog.md
