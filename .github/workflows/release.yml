@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - "*"
+    branches:
+      - "**"
 
 env:
   BUILD_TYPE: RelWithDebInfo # So that smart IQ people can troubleshoot in case of crashes
@@ -12,6 +14,8 @@ jobs:
   build:
     name: build
     runs-on: windows-latest
+
+    if: github.event_name == 'push' && (contains(github.event.head_commit.message, '[release]') || startsWith(github.ref, 'refs/tags/'))
 
     steps:
       - name: checkout code
@@ -24,6 +28,7 @@ jobs:
           build-config: "${{env.BUILD_TYPE}}"
 
       - name: create release
+        if: startsWith(github.ref, 'refs/tags/')
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -32,9 +37,10 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
-            [changelog.md#v${{ github.ref }}](changelog.md#v${{ github.ref }})
+            [changelog for ${{ github.ref }}](changelog.md#${{ github.ref }})
 
       - name: upload release asset
+        if: startsWith(github.ref, 'refs/tags/')
         id: upload_release_asset
         uses: actions/upload-release-asset@v1
         env:
