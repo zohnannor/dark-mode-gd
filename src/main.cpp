@@ -10,24 +10,27 @@
 
 using namespace geode::prelude;
 
-// TODO:
-// - define constants
-// - add settings
-// - split into files?
-// - exception safety
-// - expand readme, about.md
-// - compatibility with other mods?
-// - lists progress bars
-// - name input, description input
-// - text?
-// - level share description
-// - level loading play button bg
-// - player controls settings bg
-// - map packs?
+// TODO
 // - chest background
-// - chest platforms
+// - chest platforms (in the basement)
+// - compatibility with other mods
+// - define constants?
+// - ensure there is no crashes
+// - gauntlet colors
+// - leaderboard highlight color
+// - level loading play button background
+// - level name and description inputs backgrounds
+// - level share description
+// - lists progress bars
+// - map packs progress bars
+// - platformer controls settings background
 // - shop colors
-// - leaderboard highlight
+// - split into files?
+// - text?
+
+const ccColor3B getColorByName(std::string_view const key) {
+    return Mod::get()->getSettingValue<ccColor3B>(key);
+}
 
 const int ccc3Btoint(const ccColor3B& color) {
     return color.r << 16 | color.g << 8 | color.b << 0;
@@ -40,45 +43,45 @@ const ccColor3B intToCcc3B(int color) {
     return {.r = r, .g = g, .b = b};
 };
 
-const int darken(int color) {
-    switch (color) {
-        case 0x944E27:
-            [[fallthrough]];
-        case 0x9C552A:
-            [[fallthrough]];
-        case 0xA1582C:
-            [[fallthrough]];
-        case 0xBF723E:
-            return 0x222222;
+const ccColor3B darken(const ccColor3B& color) {
+    auto hex = ccc3Btoint(color);
+    switch (hex) {
         case 0x00FF00:
-            return 0x008000;
+            return getColorByName("normal-mode-bar");
         case 0x00FFFF:
-            return 0x008080;
-        case 0xC2723E:
-        case 0x6C99D8:
-            return 0x333333;
-        case 0x904F27:
-            return 0x323232;
-        case 0x001F4F:
-            [[fallthrough]];
-        case 0x00245B:
-            [[fallthrough]];
-        case 0x002762:
-            [[fallthrough]];
-        case 0x002E75:
-            [[fallthrough]];
-        case 0x00388D:
-            [[fallthrough]];
+            return getColorByName("practice-mode-bar");
+        case 0xBF723E:
+            return getColorByName("icon-set-bg");
+        case 0xA1582C:
+            return getColorByName("even-list-item-bg");
+        case 0x9C552A:
+            return getColorByName("even-list-item-thin-bg");
         case 0x824021:
-            return 0x000000;
+            return getColorByName("comment-bg");
+        case 0xC2723E:
+            return getColorByName("odd-list-item-bg");
+        case 0x904F27:
+            return getColorByName("odd-list-item-thin-bg");
+        case 0x00388D:
+            return getColorByName("level-search-bg");
+        case 0x002762:
+            return getColorByName("level-search-bar-bg");
+        case 0x6C99D8:
+            return getColorByName("level-search-bar-font");
+        case 0x002E75:
+            return getColorByName("quick-search-bg");
+        case 0x00245B:
+            return getColorByName("difficulty-filters-bg");
+        case 0x001F4F:
+            return getColorByName("length-filters-bg");
         default:
             return color;
     }
-}
-
-const ccColor3B darken(const ccColor3B& color) {
-    return intToCcc3B(darken(ccc3Btoint(color)));
 };
+
+const int darken(const int color) {
+    return ccc3Btoint(darken(intToCcc3B(color)));
+}
 
 const ccColor4B darken(const ccColor4B& color) {
     ccColor3B color3B = {.r = color.r, .g = color.g, .b = color.b};
@@ -216,7 +219,7 @@ class $modify(CustomColorsLevelPage, LevelPage) {
     };
 };
 
-// TODO: not implemented in Geode.
+// TODO: not implemented in Geode apparently
 // class $modify(CustomColorsGJScoreCell, GJScoreCell) {
 //     void draw() {
 //         darkenNode(getChildOfType<CCLayerColor>(this, 0));
