@@ -19,8 +19,8 @@
 			"default": "#008000"
 		},
 		"practice-mode-bar": {
-			"name": "Normal mode bar",
-			"description": "Color for a normal mode bar",
+			"name": "Practice mode bar",
+			"description": "Color for a practice mode bar",
 			"type": "color",
 			"default": "#008080"
 		},
