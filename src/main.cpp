@@ -6,6 +6,7 @@
 #include <Geode/modify/CommentCell.hpp>
 #include <Geode/modify/GJCommentListLayer.hpp>
 #include <Geode/modify/GJScoreCell.hpp>
+#include <Geode/modify/InfoLayer.hpp>
 #include <Geode/modify/LevelInfoLayer.hpp>
 #include <Geode/modify/LevelPage.hpp>
 #include <Geode/modify/LevelSearchLayer.hpp>
@@ -179,6 +180,20 @@ class $modify(CustomColorsLevelInfoLayer, LevelInfoLayer) {
             if (auto sprite = getChildOfType<CCSprite>(bar, 0)) {
                 darkenNode(typeinfo_cast<CCNodeRGBA*>(sprite));
             }
+        }
+
+        return true;
+    };
+};
+
+class $modify(CustomColorsInfoLayer, InfoLayer) {
+    bool init(GJGameLevel * p0, GJUserScore * p1, GJLevelList * p2) {
+        if (!InfoLayer::init(p0, p1, p2)) {
+            return false;
+        }
+
+        if (auto bar = this->getChildByIDRecursive("desc-background")) {
+            darkenNode(typeinfo_cast<CCNodeRGBA*>(bar));
         }
 
         return true;
