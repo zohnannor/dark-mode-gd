@@ -1,7 +1,7 @@
 {
-	"geode": "2.0.0-beta.12",
+	"geode": "2.0.0",
 	"gd": "2.204",
-	"version": "v0.1.1",
+	"version": "v0.1.2",
 	"id": "zohnannor.dark_mode",
 	"name": "Dark Mode",
 	"developer": "zohnannor",
@@ -10,6 +10,13 @@
 		"url": "https://github.com/zohnannor/dark-mode-gd/issues",
 		"info": "Create a new issue describing your problem in details"
 	},
+	"dependencies": [
+		{
+			"id": "geode.node-ids",
+			"importance": "required",
+			"version": "v1.1.4"
+		}
+	],
 	"description": "Changes hard-coded colors to a dark-mode-style theme with an option of customization. Inspired by Absolute's DarkMode Patcher for 2.1.",
 	"settings": {
 		"floating-settings-button": {
