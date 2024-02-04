@@ -6,6 +6,15 @@ This mod is a [Geode] port of old patch by [Absolute] made for [RedHuseey]'s [Da
 
 Check out mod's settings, the default values are set to have same values as [Absolute]'s [DarkMode Patcher] patches.
 
+## Disclaimer
+
+It is not a texture pack. This mod only changes the colors that are not changeable via texture packs, helpful for "dark mode" texture packs.
+
+If you're looking for a dark mode texture pack, you can check out these:
+
+-   (TODO: add a link when(if?) released) [RedHuseey]'s `Dark Mode GD texture pack` ported to 2.2
+-   (TODO: also add a link once finished and release) My texture pack
+
 ### TODO:
 
 -   ensure there is no crashes
@@ -21,7 +30,6 @@ Check out mod's settings, the default values are set to have same values as [Abs
 -   shop colors
 -   gauntlet colors
 -   leaderboard highlight color
--   "floating ui settings", a button on every screen for quick customization (for future me: `#include <Geode/ui/GeodeUI.hpp>`)
 
 If you find a bug or have a suggestion, reach out on [Github] (open new issue) or [Discord] (`@zohnannor`)!
 

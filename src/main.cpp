@@ -1,4 +1,7 @@
+#include <Geode/cocos/layers_scenes_transitions_nodes/CCScene.h>
+
 #include <Geode/Geode.hpp>
+#include <Geode/loader/SettingEvent.hpp>
 #include <Geode/modify/CCLayerColor.hpp>
 #include <Geode/modify/CommentCell.hpp>
 #include <Geode/modify/GJCommentListLayer.hpp>
@@ -6,7 +9,9 @@
 #include <Geode/modify/LevelInfoLayer.hpp>
 #include <Geode/modify/LevelPage.hpp>
 #include <Geode/modify/LevelSearchLayer.hpp>
+#include <Geode/modify/MenuLayer.hpp>
 #include <Geode/modify/PauseLayer.hpp>
+#include <Geode/ui/GeodeUI.hpp>
 
 using namespace geode::prelude;
 
@@ -229,3 +234,41 @@ class $modify(CustomColorsLevelPage, LevelPage) {
 
 //     void updateBGColor(int p0) { GJScoreCell::updateBGColor(darken(p0)); }
 // };
+
+CCMenu* settingsBtnMenu = nullptr;
+
+struct ModSettingsPopup : public CCObject {
+    void openSettings(CCObject* _obj) { openSettingsPopup(Mod::get()); };
+};
+
+$execute {
+    listenForSettingChanges(
+        "floating-settings-button", +[](bool floatingSettingsBtnEnabled) {
+            if (floatingSettingsBtnEnabled) {
+                settingsBtnMenu = CCMenu::create();
+
+                auto winSize = CCDirector::sharedDirector()->getWinSize();
+
+                auto sprite = CCSprite::createWithSpriteFrameName(
+                    "GJ_optionsBtn_001.png");
+                sprite->setScale(0.6);
+                ModSettingsPopup s;
+                auto settingsBtn = CCMenuItemSpriteExtra::create(
+                    sprite, &s, menu_selector(ModSettingsPopup::openSettings));
+                settingsBtn->setPosition({-((winSize.width / 2) - 25), 0});
+                settingsBtn->setSizeMult(1.2f);
+                settingsBtn->setOpacity(128);
+                settingsBtn->setZOrder(-10000);
+                settingsBtnMenu->addChild(settingsBtn);
+
+                CCScene::get()->addChild(settingsBtnMenu);
+                SceneManager::get()->keepAcrossScenes(settingsBtnMenu);
+            } else {
+                SceneManager::get()->forget(settingsBtnMenu);
+            }
+        });
+}
+
+$on_mod(DataSaved) {
+    Mod::get()->setSettingValue<bool>("floating-settings-button", false);
+}

@@ -12,6 +12,12 @@
 	},
 	"description": "Changes hard-coded colors to a dark-mode-style theme with an option of customization. Inspired by Absolute's DarkMode Patcher for 2.1.",
 	"settings": {
+		"floating-settings-button": {
+			"name": "Floating settings button",
+			"description": "Set this to checked to display the button that pulls up these options from any screen, for quick color editing.\n\n<cb>NOTE</c>: you will have to reopen or somehow refresh whatever thing's colors you're editing.",
+			"type": "bool",
+			"default": false
+		},
 		"normal-mode-bar": {
 			"name": "Normal mode bar",
 			"description": "Color for a normal mode bar",
