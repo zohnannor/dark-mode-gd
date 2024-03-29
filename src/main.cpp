@@ -4,6 +4,7 @@
 #include <Geode/loader/SettingEvent.hpp>
 #include <Geode/modify/CCLayerColor.hpp>
 #include <Geode/modify/CommentCell.hpp>
+#include <Geode/modify/EditLevelLayer.hpp>
 #include <Geode/modify/GJChestSprite.hpp>
 #include <Geode/modify/GJCommentListLayer.hpp>
 #include <Geode/modify/GJScoreCell.hpp>
@@ -14,6 +15,7 @@
 #include <Geode/modify/MenuLayer.hpp>
 #include <Geode/modify/PauseLayer.hpp>
 #include <Geode/modify/SecretRewardsLayer.hpp>
+#include <Geode/modify/ShareLevelLayer.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 
 using namespace geode::prelude;
@@ -315,6 +317,36 @@ class $modify(DarkModeSecretRewardsLayer, SecretRewardsLayer) {
         }
 
         return secretRewardsLayer;
+    };
+};
+
+class $modify(DarkModeEditLevelLayer, EditLevelLayer) {
+    static EditLevelLayer* create(GJGameLevel * p0) {
+        auto editLevelLayer = EditLevelLayer::create(p0);
+
+        if (auto bg = editLevelLayer->getChildByID("level-name-background")) {
+            darkenNode(typeinfo_cast<CCNodeRGBA*>(bg));
+        }
+
+        if (auto bg = editLevelLayer->getChildByID("description-background")) {
+            darkenNode(typeinfo_cast<CCNodeRGBA*>(bg));
+        }
+
+        return editLevelLayer;
+    };
+};
+
+class $modify(DarkModeShareLevelLayer, ShareLevelLayer) {
+    static ShareLevelLayer* create(GJGameLevel * p0) {
+        auto shareLevelLayer = ShareLevelLayer::create(p0);
+
+        auto ccLayer = getChildOfType<CCLayer>(shareLevelLayer, 0);
+
+        if (auto bg = getChildOfType<CCScale9Sprite>(ccLayer, 1)) {
+            darkenNode(typeinfo_cast<CCNodeRGBA*>(bg));
+        }
+
+        return shareLevelLayer;
     };
 };
 
