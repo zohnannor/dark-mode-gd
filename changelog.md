@@ -1,3 +1,7 @@
+# v0.1.2
+
+-   Chest reward background and shine
+
 # v0.1.1
 
 -   Floating settings button
