@@ -27,7 +27,6 @@ using namespace geode::prelude;
 // - gauntlet colors
 // - leaderboard highlight color
 // - level loading play button background
-// - level name and description inputs backgrounds
 // - level share description
 // - lists progress bars
 // - map packs progress bars
