@@ -1,6 +1,7 @@
 # v0.1.2
 
 -   Chest reward background and shine
+-   Chest platforms
 
 # v0.1.1
 
