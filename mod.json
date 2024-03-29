@@ -129,9 +129,27 @@
 		},
 		"reward-chest-bg": {
 			"name": "Chest reward background",
-			"description": "The color of the textures behind the opened chest",
+			"description": "Background textures behind the opened chest",
 			"type": "color",
 			"default": "#334499"
+		},
+		"chest1-platform": {
+			"name": "Tier 1 chest reward platforms",
+			"description": "Platforms under tier 1 chests in the basement",
+			"type": "color",
+			"default": "#646464"
+		},
+		"chest2-platform": {
+			"name": "Tier 2 chest reward platforms",
+			"description": "Platforms under tier 2 chests in the basement",
+			"type": "color",
+			"default": "#646464"
+		},
+		"milestone-chest-platform": {
+			"name": "Milestone chest reward platforms",
+			"description": "Platforms under milestone chests in the basement",
+			"type": "color",
+			"default": "#646464"
 		}
 	}
 }

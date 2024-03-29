@@ -13,12 +13,12 @@
 #include <Geode/modify/LevelSearchLayer.hpp>
 #include <Geode/modify/MenuLayer.hpp>
 #include <Geode/modify/PauseLayer.hpp>
+#include <Geode/modify/SecretRewardsLayer.hpp>
 #include <Geode/ui/GeodeUI.hpp>
 
 using namespace geode::prelude;
 
 // TODO
-// - chest platforms (in the basement)
 // - compatibility with other mods
 // - define constants?
 // - ensure there is no crashes
@@ -49,6 +49,7 @@ const ccColor3B intToCcc3B(int color) {
     return {.r = r, .g = g, .b = b};
 };
 
+// TODO: why tf did I write it like this? rewrite into a `id -> color` fn later
 const ccColor3B darken(const ccColor3B& color) {
     auto hex = ccc3Btoint(color);
     switch (hex) {
@@ -88,6 +89,12 @@ const ccColor3B darken(const ccColor3B& color) {
             return getColorByName("reward-shine-blue");
         case 0x334499:
             return getColorByName("reward-chest-bg");
+        case 0x6E3882:
+            return getColorByName("chest1-platform");
+        case 0x646464:
+            return getColorByName("chest2-platform");
+        case 0x6400B4:
+            return getColorByName("milestone-chest-platform");
         default:
             return color;
     }
@@ -108,7 +115,7 @@ void darkenNode(CCRGBAProtocol* rgbaNode) {
     rgbaNode->setColor(darken(rgbaNode->getColor()));
 }
 
-class $modify(CustomColorsGJCommentListLayer, GJCommentListLayer) {
+class $modify(DarkModeColorsGJCommentListLayer, GJCommentListLayer) {
     static GJCommentListLayer* create(BoomListView * p0, char const* p1,
                                       cocos2d::ccColor4B p2, float p3, float p4,
                                       bool p5) {
@@ -119,7 +126,7 @@ class $modify(CustomColorsGJCommentListLayer, GJCommentListLayer) {
     };
 };
 
-class $modify(CustomColorsCommentCell, CommentCell) {
+class $modify(DarkModeColorsCommentCell, CommentCell) {
     void draw() {
         if (auto c = getChildOfType<CCLayerColor>(this, 0)) {
             darkenNode(c);
@@ -134,14 +141,14 @@ class $modify(CustomColorsCommentCell, CommentCell) {
     void updateBGColor(int p0) { CommentCell::updateBGColor(darken(p0)); }
 };
 
-class $modify(CustomColorsCCLayerColor, CCLayerColor) {
+class $modify(DarkModeColorsCCLayerColor, CCLayerColor) {
     void draw() {
         darkenNode(this);
         CCLayerColor::draw();
     };
 };
 
-class $modify(CustomColorsLevelSearchLayer, LevelSearchLayer) {
+class $modify(DarkModeColorsLevelSearchLayer, LevelSearchLayer) {
     bool init(int p0) {
         if (!LevelSearchLayer::init(p0)) {
             return false;
@@ -173,7 +180,7 @@ class $modify(CustomColorsLevelSearchLayer, LevelSearchLayer) {
     };
 };
 
-class $modify(CustomColorsLevelInfoLayer, LevelInfoLayer) {
+class $modify(DarkModeColorsLevelInfoLayer, LevelInfoLayer) {
     bool init(GJGameLevel * p0, bool p1) {
         if (!LevelInfoLayer::init(p0, p1)) {
             return false;
@@ -194,7 +201,7 @@ class $modify(CustomColorsLevelInfoLayer, LevelInfoLayer) {
     };
 };
 
-class $modify(CustomColorsInfoLayer, InfoLayer) {
+class $modify(DarkModeColorsInfoLayer, InfoLayer) {
     bool init(GJGameLevel * p0, GJUserScore * p1, GJLevelList * p2) {
         if (!InfoLayer::init(p0, p1, p2)) {
             return false;
@@ -208,7 +215,7 @@ class $modify(CustomColorsInfoLayer, InfoLayer) {
     };
 };
 
-class $modify(CustomColorsPauseLayer, PauseLayer) {
+class $modify(DarkModeColorsPauseLayer, PauseLayer) {
     static PauseLayer* create(bool p0) {
         auto pauseLayer = PauseLayer::create(p0);
 
@@ -227,7 +234,7 @@ class $modify(CustomColorsPauseLayer, PauseLayer) {
     };
 };
 
-class $modify(CustomColorsLevelPage, LevelPage) {
+class $modify(DarkModeColorsLevelPage, LevelPage) {
     static LevelPage* create(GJGameLevel * p0) {
         auto levelPage = LevelPage::create(p0);
 
@@ -247,7 +254,7 @@ class $modify(CustomColorsLevelPage, LevelPage) {
     };
 };
 
-class $modify(CustomGJChestSprite, GJChestSprite) {
+class $modify(DarkModeGJChestSprite, GJChestSprite) {
     TodoReturn switchToState(ChestSpriteState p0, bool state) {
         GJChestSprite::switchToState(p0, state);
 
@@ -278,15 +285,49 @@ class $modify(CustomGJChestSprite, GJChestSprite) {
     };
 };
 
+class $modify(DarkModeSecretRewardsLayer, SecretRewardsLayer) {
+    static SecretRewardsLayer* create(bool p0) {
+        auto secretRewardsLayer = SecretRewardsLayer::create(p0);
+
+        auto ccLayer = secretRewardsLayer->getChildByID("main-contents");
+        auto boomScrollLayer = ccLayer->getChildByID("scroll-layer");
+        auto extendedLayer = boomScrollLayer->getChildByID("pages");
+
+        for (auto& page : CCArrayExt<CCLayer*>(extendedLayer->getChildren())) {
+            for (auto id :
+                 {"chest1-platform", "chest2-platform", "chest3-platform"}) {
+                if (auto platform = page->getChildByID(id)) {
+                    darkenNode(typeinfo_cast<CCNodeRGBA*>(platform));
+                }
+            }
+            for (auto id :
+                 {"chest4-platform", "chest5-platform", "chest6-platform"}) {
+                if (auto platform = page->getChildByID(id)) {
+                    darkenNode(typeinfo_cast<CCNodeRGBA*>(platform));
+                }
+            }
+            for (auto id : {"milestone50-platform", "milestone100-platform",
+                            "milestone200-platform"}) {
+                if (auto platform = page->getChildByID(id)) {
+                    darkenNode(typeinfo_cast<CCNodeRGBA*>(platform));
+                }
+            }
+        }
+
+        return secretRewardsLayer;
+    };
+};
+
 // TODO: not implemented in Geode apparently
-// class $modify(CustomColorsGJScoreCell, GJScoreCell) {
+// class $modify(DarkModeColorsGJScoreCell, GJScoreCell) {
 //     void draw() {
 //         darkenNode(getChildOfType<CCLayerColor>(this, 0));
 
 //         GJScoreCell::draw();
 //     };
 
-//     void updateBGColor(int p0) { GJScoreCell::updateBGColor(darken(p0)); }
+//     void updateBGColor(int p0) { GJScoreCell::updateBGColor(darken(p0));
+//     }
 // };
 
 CCMenu* settingsBtnMenu = nullptr;

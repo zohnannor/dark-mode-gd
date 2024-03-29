@@ -23,11 +23,10 @@ If you're looking for a dark mode texture pack, you can check out these:
 -   level share description
 -   level loading play button background
 -   platformer controls settings background
--   lists progress bars
--   map packs progress bars
--   chest platforms (in the basement)
--   shop colors
--   gauntlet colors
+-   lists progress bars?
+-   map packs progress bars?
+-   shop colors?
+-   gauntlet colors?
 -   leaderboard highlight color
 
 If you find a bug or have a suggestion, reach out on [Github] (open new issue) or [Discord] (`@zohnannor`)!
