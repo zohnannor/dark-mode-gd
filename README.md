@@ -8,12 +8,28 @@ Check out mod's settings, the default values are set to have same values as [Abs
 
 ## Disclaimer
 
-It is not a texture pack. This mod only changes the colors that are not changeable via texture packs, helpful for "dark mode" texture packs.
+This is not a texture pack. This mod only changes the colors that are not changeable via texture editing, helpful for "dark mode" texture packs.
 
 If you're looking for a dark mode texture pack, you can check out these:
 
 -   (TODO: add a link when(if?) released) [RedHuseey]'s `Dark Mode GD texture pack` ported to 2.2
 -   (TODO: also add a link once finished and release) My texture pack
+
+Here's how it looks with my [texture pack](#): (TODO: add link when released)
+
+<details>
+
+<summary>Expand</summary>
+
+![Profile (install to see image)](resources/profile.jpg)
+![Creator (install to see image)](resources/creator.jpg)
+![Level Search (install to see image)](resources/level-search.jpg)
+![Level Page (install to see image)](resources/level-page.jpg)
+![Level Edit (install to see image)](resources/level-edit.jpg)
+![Level Comments (install to see image)](resources/level-comments.jpg)
+![Basement (install to see image)](resources/basement.jpg)
+
+</details>
 
 ### TODO:
 

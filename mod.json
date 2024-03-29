@@ -18,6 +18,14 @@
 		}
 	],
 	"description": "Changes hard-coded colors to a dark-mode-style theme with an option of customization. Inspired by Absolute's DarkMode Patcher for 2.1.",
+	"tags": [
+		"customization"
+	],
+	"resources": {
+		"sprites": [
+			"resources/*.jpg"
+		]
+	},
 	"settings": {
 		"floating-settings-button": {
 			"name": "Floating settings button",
