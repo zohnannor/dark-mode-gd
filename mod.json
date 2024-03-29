@@ -118,19 +118,19 @@
 			"default": "#000000"
 		},
 		"reward-shine-yellow-cw": {
-			"name": "Opened daily shine (clockwise)",
+			"name": "Opened daily chest shine (clockwise)",
 			"description": "The object that rotates clockwise inside the opened daily chest",
 			"type": "color",
-			"default": "#000000"
+			"default": "#FF9600"
 		},
 		"reward-shine-yellow-ccw": {
-			"name": "Opened daily shine (counterclockwise)",
+			"name": "Opened daily chest shine (counterclockwise)",
 			"description": "The object that rotates counterclockwise inside the opened daily chest",
 			"type": "color",
-			"default": "#000000"
+			"default": "#FFC800"
 		},
 		"reward-shine-blue": {
-			"name": "Opened secret shine",
+			"name": "Opened secret chest shine",
 			"description": "The object that rotates inside the opened secret chest",
 			"type": "color",
 			"default": "#0096FF"

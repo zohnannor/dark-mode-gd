@@ -82,9 +82,9 @@ const ccColor3B darken(const ccColor3B& color) {
             return getColorByName("difficulty-filters-bg");
         case 0x001F4F:
             return getColorByName("length-filters-bg");
-        case 0xFFC800:
-            return getColorByName("reward-shine-yellow-cw");
         case 0xFF9600:
+            return getColorByName("reward-shine-yellow-cw");
+        case 0xFFC800:
             return getColorByName("reward-shine-yellow-ccw");
         case 0x0096FF:
             return getColorByName("reward-shine-blue");
