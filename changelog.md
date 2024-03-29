@@ -2,6 +2,7 @@
 
 -   Chest reward background and shine
 -   Chest platforms
+-   Level name and description backgrounds on the edit page
 
 # v0.1.1
 
