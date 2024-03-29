@@ -25,7 +25,6 @@ If you're looking for a dark mode texture pack, you can check out these:
 -   platformer controls settings background
 -   lists progress bars
 -   map packs progress bars
--   chest background
 -   chest platforms (in the basement)
 -   shop colors
 -   gauntlet colors

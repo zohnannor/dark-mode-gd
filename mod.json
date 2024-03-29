@@ -1,5 +1,5 @@
 {
-	"geode": "2.0.0",
+	"geode": "2.0.0-beta.22",
 	"gd": "2.204",
 	"version": "v0.1.2",
 	"id": "zohnannor.dark_mode",
@@ -14,7 +14,7 @@
 		{
 			"id": "geode.node-ids",
 			"importance": "required",
-			"version": "v1.1.4"
+			"version": "v1.8.1"
 		}
 	],
 	"description": "Changes hard-coded colors to a dark-mode-style theme with an option of customization. Inspired by Absolute's DarkMode Patcher for 2.1.",
@@ -108,6 +108,30 @@
 			"description": "Background of level length filters",
 			"type": "color",
 			"default": "#000000"
+		},
+		"reward-shine-yellow-cw": {
+			"name": "Opened daily shine (clockwise)",
+			"description": "The object that rotates clockwise inside the opened daily chest",
+			"type": "color",
+			"default": "#000000"
+		},
+		"reward-shine-yellow-ccw": {
+			"name": "Opened daily shine (counterclockwise)",
+			"description": "The object that rotates counterclockwise inside the opened daily chest",
+			"type": "color",
+			"default": "#000000"
+		},
+		"reward-shine-blue": {
+			"name": "Opened secret shine",
+			"description": "The object that rotates inside the opened secret chest",
+			"type": "color",
+			"default": "#0096FF"
+		},
+		"reward-chest-bg": {
+			"name": "Chest reward background",
+			"description": "The color of the textures behind the opened chest",
+			"type": "color",
+			"default": "#334499"
 		}
 	}
 }

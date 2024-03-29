@@ -4,6 +4,7 @@
 #include <Geode/loader/SettingEvent.hpp>
 #include <Geode/modify/CCLayerColor.hpp>
 #include <Geode/modify/CommentCell.hpp>
+#include <Geode/modify/GJChestSprite.hpp>
 #include <Geode/modify/GJCommentListLayer.hpp>
 #include <Geode/modify/GJScoreCell.hpp>
 #include <Geode/modify/InfoLayer.hpp>
@@ -17,7 +18,6 @@
 using namespace geode::prelude;
 
 // TODO
-// - chest background
 // - chest platforms (in the basement)
 // - compatibility with other mods
 // - define constants?
@@ -80,6 +80,14 @@ const ccColor3B darken(const ccColor3B& color) {
             return getColorByName("difficulty-filters-bg");
         case 0x001F4F:
             return getColorByName("length-filters-bg");
+        case 0xFFC800:
+            return getColorByName("reward-shine-yellow-cw");
+        case 0xFF9600:
+            return getColorByName("reward-shine-yellow-ccw");
+        case 0x0096FF:
+            return getColorByName("reward-shine-blue");
+        case 0x334499:
+            return getColorByName("reward-chest-bg");
         default:
             return color;
     }
@@ -236,6 +244,37 @@ class $modify(CustomColorsLevelPage, LevelPage) {
         }
 
         return levelPage;
+    };
+};
+
+class $modify(CustomGJChestSprite, GJChestSprite) {
+    TodoReturn switchToState(ChestSpriteState p0, bool state) {
+        GJChestSprite::switchToState(p0, state);
+
+        // chest is closed
+        if (this->getChildrenCount() < 5) {
+            return;
+        }
+
+        if (auto shine = getChildOfType<CCSprite>(this, 3)) {
+            darkenNode(typeinfo_cast<CCNodeRGBA*>(shine));
+        }
+
+        if (auto shine = getChildOfType<CCSprite>(this, 4)) {
+            darkenNode(typeinfo_cast<CCNodeRGBA*>(shine));
+        }
+
+        if (auto glowBg = getChildOfType<CCSprite>(this, 5)) {
+            darkenNode(typeinfo_cast<CCNodeRGBA*>(glowBg));
+        }
+
+        if (auto glowBg = getChildOfType<CCSprite>(this, 6)) {
+            darkenNode(typeinfo_cast<CCNodeRGBA*>(glowBg));
+        }
+
+        if (auto block = getChildOfType<CCSprite>(this, 7)) {
+            darkenNode(typeinfo_cast<CCNodeRGBA*>(block));
+        }
     };
 };
 
