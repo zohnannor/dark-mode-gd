@@ -1,5 +1,8 @@
 # DarkMode
 
+> [!CAUTION]
+> Discontinued, use [Happy Textures](https://github.com/Alphalaneous/HappyTextures) instead.
+
 This mod is a [Geode] port of old patch by [Absolute] made for [RedHuseey]'s [Dark Mode GD texture pack].
 
 ## But it has _settings_
